@@ -8,4 +8,6 @@ public interface UserDao {
     String getUserDetail(String id) throws SQLException;
 
     String createUser(UserInfo bean) throws SQLException;
+
+    String deleteUser(UserInfo bean) throws SQLException;
 }

@@ -6,4 +6,6 @@ public interface UserService {
      String getUserDetail(String id);
 
      String createUser(UserInfo bean);
+
+     String deleteUser(UserInfo bean);
 }

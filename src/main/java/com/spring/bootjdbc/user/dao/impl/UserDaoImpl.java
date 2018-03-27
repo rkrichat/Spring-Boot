@@ -71,4 +71,39 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
     }
+
+    @Override
+    public String deleteUser(UserInfo bean) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.56.102:1521:stipnxa","sti_branch_bkk","sti_branch_bkk");
+            con.setAutoCommit(false);
+            ps = con.prepareStatement("DELETE custdata2 WHERE code = ?");
+            ps.setString(1, bean.getCode());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                con.commit();
+                return "Delete user Successfully";
+            }
+        } catch (Exception e) {
+            con.rollback();
+            e.printStackTrace();
+        }finally {
+            if (con != null) {
+                con.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return null;
+    }
 }
+
+

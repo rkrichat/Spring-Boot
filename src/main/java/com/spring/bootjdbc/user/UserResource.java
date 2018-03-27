@@ -20,4 +20,9 @@ public class UserResource {
     public String createUser(@RequestBody UserInfo bean) {
         return userService.createUser(bean);
     }
+
+    @DeleteMapping
+    public String deleteUser(@RequestBody UserInfo bean) {
+        return userService.deleteUser(bean);
+    }
 }

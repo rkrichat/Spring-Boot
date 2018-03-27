@@ -30,4 +30,14 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
+
+    @Override
+    public String deleteUser(UserInfo bean) {
+        try {
+            return userDao.deleteUser(bean);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
