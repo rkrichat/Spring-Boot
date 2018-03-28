@@ -12,8 +12,9 @@ public class UserResource {
     private UserService userService;
 
     @GetMapping
-    public String getUserDetail(@RequestParam String id) {
-        return userService.getUserDetail(id);
+    public UserInfo getUserDetail(@RequestParam String id) {
+        String result = userService.getUserDetail(id);
+        return new UserInfo(result);
     }
 
     @PutMapping

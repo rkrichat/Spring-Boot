@@ -8,6 +8,18 @@ public class UserInfo {
         return code;
     }
 
+    public UserInfo() {
+    }
+
+    public UserInfo(String name) {
+        this.name = name;
+    }
+
+    public UserInfo(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     public void setCode(String code) {
         this.code = code;
     }
