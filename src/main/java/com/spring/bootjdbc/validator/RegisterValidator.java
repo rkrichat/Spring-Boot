@@ -22,28 +22,13 @@ public class RegisterValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        System.out.println("---------------->come here");
         UserInfo bean = (UserInfo) target;
-        System.out.println("---------------->come here2");
-        if (bean.getCode() == null) {
-            errors.rejectValue("code","required.code");
-        }else {
-            try {
-                String validate = userDao.getUserDetail(bean.getCode());
-                System.out.println(validate);
-                if(validate!=null){
-                    errors.rejectValue("code","code.already.exist");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+        try {
+            if (userDao.getUserDetail(bean.getCode()) != null) {
+                errors.reject("code", "code.already.exist");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        if (bean.getName() == null) {
-            errors.rejectValue("name", "required.name");
-        }
-    }
-
-    public void show() {
-        System.out.println("---->SHOW");
     }
 }

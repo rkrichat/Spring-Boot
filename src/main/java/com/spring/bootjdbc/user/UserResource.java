@@ -2,12 +2,16 @@ package com.spring.bootjdbc.user;
 
 import com.spring.bootjdbc.bean.UserInfo;
 import com.spring.bootjdbc.user.service.UserService;
+import com.spring.bootjdbc.validator.RegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterReturnValueHandler;
 
 import javax.validation.Valid;
 
@@ -19,28 +23,23 @@ public class UserResource {
     private UserService userService;
 
     @Autowired
-    private Validator registerValidator;
-
-
-    @InitBinder("userInfo")
-    public void setupBinder(WebDataBinder binder) {
-        binder.addValidators(registerValidator);
-    }
+    private RegisterValidator registerValidator;
 
     @GetMapping
-    public UserInfo getUserDetail(@RequestParam String id) {
+    public ResponseEntity getUserDetail(@RequestParam String id) {
         String result = userService.getUserDetail(id);
-        return new UserInfo(result);
+        return new ResponseEntity<Object>(new UserInfo(result), HttpStatus.OK);
     }
 
     @PutMapping
-    public String createUser(@Valid @RequestBody UserInfo bean, BindingResult result) {
+    public ResponseEntity createUser(@Valid @RequestBody UserInfo bean, BindingResult result) {
+        System.out.println("---------------------------->"+result);
         registerValidator.validate(bean,result);
         System.out.println("---------------------------->"+result);
         if (result.hasErrors()) {
-            return result.getFieldError().getDefaultMessage();
+            return new ResponseEntity<Object>(result.getAllErrors(), HttpStatus.SEE_OTHER);
         }else{
-            return  userService.createUser(bean);
+            return new ResponseEntity<Object>(userService.createUser(bean), HttpStatus.OK);
         }
     }
 
