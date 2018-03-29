@@ -10,7 +10,7 @@ public class UserInfo {
     private String code;
 
     @NotBlank(message = "name.is.required")
-    @Length(min = 1,max = 5)
+    @Length(min = 1,max = 50)
     private String name;
 
     public String getCode() {

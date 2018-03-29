@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String createUser(UserInfo bean) {
+    public UserInfo createUser(UserInfo bean) {
         try {
             return userDao.createUser(bean);
         } catch (SQLException e) {

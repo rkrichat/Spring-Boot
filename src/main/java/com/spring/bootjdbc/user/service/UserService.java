@@ -5,7 +5,7 @@ import com.spring.bootjdbc.bean.UserInfo;
 public interface UserService {
      String getUserDetail(String id);
 
-     String createUser(UserInfo bean);
+     UserInfo createUser(UserInfo bean);
 
      String deleteUser(UserInfo bean);
 }

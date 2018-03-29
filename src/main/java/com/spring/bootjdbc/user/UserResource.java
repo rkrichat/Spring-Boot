@@ -33,9 +33,7 @@ public class UserResource {
 
     @PutMapping
     public ResponseEntity createUser(@Valid @RequestBody UserInfo bean, BindingResult result) {
-        System.out.println("---------------------------->"+result);
         registerValidator.validate(bean,result);
-        System.out.println("---------------------------->"+result);
         if (result.hasErrors()) {
             return new ResponseEntity<Object>(result.getAllErrors(), HttpStatus.SEE_OTHER);
         }else{

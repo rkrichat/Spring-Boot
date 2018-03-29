@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public interface UserDao {
     String getUserDetail(String id) throws SQLException;
 
-    String createUser(UserInfo bean) throws SQLException;
+    UserInfo createUser(UserInfo bean) throws SQLException;
 
     String deleteUser(UserInfo bean) throws SQLException;
 }

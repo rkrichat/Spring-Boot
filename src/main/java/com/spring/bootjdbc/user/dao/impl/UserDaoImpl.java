@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public String createUser(UserInfo bean) throws SQLException {
+    public UserInfo createUser(UserInfo bean) throws SQLException {
         Connection con =null;
         PreparedStatement ps =null;
         ResultSet rs = null;
@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 con.commit();
-                return "Create User Successfully";
+                return bean;
             }
         } catch (Exception e) {
             con.rollback();
