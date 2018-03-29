@@ -1,7 +1,16 @@
 package com.spring.bootjdbc.bean;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+
 public class UserInfo {
+    @NotBlank
     private String code;
+
+    @NotBlank(message = "name.is.required")
+    @Length(min = 1,max = 5)
     private String name;
 
     public String getCode() {
