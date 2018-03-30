@@ -33,7 +33,7 @@ public class RegisterTest {
 
     @Test
     public void createUser_noExist_mustPass() {
-        UserInfo data = new UserInfo("user2","earl");
+        UserInfo data = new UserInfo("no_exist","earl");
         Errors errors = new BeanPropertyBindingResult(data, "userInfo");
         validator.validate(data, errors);
         assertFalse(errors.hasErrors());

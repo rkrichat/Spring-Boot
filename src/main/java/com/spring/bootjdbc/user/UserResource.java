@@ -35,7 +35,7 @@ public class UserResource {
     public ResponseEntity createUser(@Valid @RequestBody UserInfo bean, BindingResult result) {
         registerValidator.validate(bean,result);
         if (result.hasErrors()) {
-            return new ResponseEntity<Object>(result.getAllErrors(), HttpStatus.SEE_OTHER);
+            return new ResponseEntity<Object>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<Object>(userService.createUser(bean), HttpStatus.OK);
         }
